@@ -88,9 +88,9 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
+      to top,
+      rgb(229, 228, 226),
+      rgb(227, 115, 131)
     )
     rgb(var(--background-start-rgb));
 }
@@ -104,4 +104,25 @@ a {
   html {
     color-scheme: dark;
   }
+}
+.inputBox {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  width: 300px;
+  font-size: 16px;
+  color: black;
+  outline: none; /* Optional: Removes default outline */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  transition: border-color 0.3s; /* Optional: Smooth transition for focus */
+}
+
+.inputBox:focus {
+  border-color: #0070f3; /* Optional: Change border color on focus */
+}
+.text-color {
+  padding: 10px;
+  width: 300px;
+  color: black; 
 }
