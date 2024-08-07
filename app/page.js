@@ -1,8 +1,11 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteIcon from '@mui/icons-material/Delete';
 import inputBox from './globals.css';
 import Fuse from 'fuse.js';
-import { Box, Stack, Typography, Button, Modal, TextField, GlobalStyles } from '@mui/material';
+import { Box, Stack, Typography, Button, Modal, TextField, GlobalStyles, IconButton } from '@mui/material';
 import { firestore } from '@/firebase';
 import { collection, doc, getDocs, query, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
 const style = {
@@ -96,8 +99,8 @@ export default function Home() {
 
   const filteredInventory = searchTerm && fuse
     ? fuse.search(searchTerm).map(result => result.item)
-    : inventory;
-
+    : inventory; 
+// this is a single line if else statement
   return (
     <Box
       width="100vw"
@@ -156,7 +159,7 @@ export default function Home() {
             </h1>
           </Box>
           <Box justifyContent={'left'} marginRight={2}>
-          <Button variant="contained" onClick={handleOpen}>
+          <Button variant="contained" onClick={handleOpen} className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
             Add New Item
           </Button>
           </Box>
@@ -189,15 +192,31 @@ export default function Home() {
               <Typography variant={'h6'} color={'#333'} textAlign={'right'}>
                 Quantity: {quantity}
               </Typography>
-              <Button variant="contained" onClick={() => addQuantity(name)}>
-                +
-              </Button>
-              <Button variant="contained" onClick={() => subQuantity(name)}>
-                -
-              </Button>
-              <Button variant="contained" onClick={() => removeItem(name)}>
-                Remove
-              </Button>
+              <Box display="flex" alignItems="center" gap={1}>
+              <IconButton
+                  onClick={() => addQuantity(name)}
+                  color="primary"
+                  aria-label="add"
+                >
+                  <AddIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => subQuantity(name)}
+                  color="primary"
+                  aria-label="subtract"
+                  disabled={quantity === 0}
+                >
+                  <RemoveIcon />
+                </IconButton>
+
+              <IconButton
+                  onClick={() => removeItem(name)}
+                  color="secondary"
+                  aria-label="delete"
+                >
+                  <DeleteIcon />
+                </IconButton>
+                </Box>
             </Box>
           ))}
         </Stack>
